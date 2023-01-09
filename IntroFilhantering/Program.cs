@@ -7,7 +7,7 @@ static void MainMenu(){
         Console.WriteLine("What do you wish to do?");
         Console.WriteLine("(1) Write text in the file");
         Console.WriteLine("(2) Print the file");
-        Console.WriteLine("(3)Save ");
+        Console.WriteLine("(3) Save a list of people in a document");
         switch(Console.ReadLine()){
             case "1":
                 TextMenu();
@@ -16,7 +16,7 @@ static void MainMenu(){
                 ReadMenu();
                 break;
             case "3":
-                
+                CreatePersonFile();
                 break;
             default:
                 Console.Clear();
@@ -127,4 +127,12 @@ static void PrintALine(){
     Console.ReadLine();
     Console.Clear();
     MainMenu();
+}
+
+static void CreatePersonFile(){
+    using (StreamWriter personfile = new StreamWriter("personfile.txt"))
+    {
+
+    }
+
 }
