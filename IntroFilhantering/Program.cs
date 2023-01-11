@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Text.RegularExpressions;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 MainMenu();
@@ -16,7 +17,7 @@ static void MainMenu(){
                 ReadMenu();
                 break;
             case "3":
-                CreatePersonFile();
+                PersonRegistryMenu();
                 break;
             default:
                 Console.Clear();
@@ -129,10 +130,37 @@ static void PrintALine(){
     MainMenu();
 }
 
-static void CreatePersonFile(){
-    using (StreamWriter personfile = new StreamWriter("personfile.txt"))
-    {
+static void PersonRegistryMenu(){
+    Console.Clear();
+    using (FileStream file = File.Open(@"PersonRegistry.txt", FileMode.OpenOrCreate)){
+        Console.WriteLine("A registry for people has been created. Do you wish to add a person or go back to the main menu?");
+        Console.WriteLine("(1) Enter a new person");
+        Console.WriteLine("(2) Exit to main menu");
+        switch (Console.ReadLine())
+        {
+            case "1":
+                Console.Clear();
+                Console.Write("Type the first name of the person you want to add: ");
+                string firstName = Console.ReadLine();
+                if(!Regex.IsMatch(firstName, "^[a-zA-Z]*$")){
+                    
+                    Console.WriteLine("the name needs to only contain letters from the english alphabet, please press enter to try again.");
+                    Console.ReadLine();
 
+                }
+                Console.Write("Type the last name of the person you want to add: ");
+                string lastName = Console.ReadLine();
+                if(Regex.IsMatch(lastName, "^[a-zA-Z0-9]*$"))
+                {
+
+                }
+                break;
+            case "2":
+                break;
+            default:
+                Console.WriteLine("You need to type 1 or 2 in the menu. Press enter to try again");
+                PersonRegistryMenu();
+            break;
+        }
     }
-
 }
